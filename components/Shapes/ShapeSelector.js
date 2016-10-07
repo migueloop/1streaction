@@ -19,8 +19,8 @@ class ShapeSelector extends React.Component {
 
     _getSelectors () {
       const selectorsList = [
-        { id:1 , title: 'diamond'},
-        { id:2, title: 'square'}
+        { id:1 , title: 'Diamond'},
+        { id:2, title: 'Square'}
       ];
 
       return selectorsList.map((selector) => {
@@ -49,7 +49,9 @@ class SelectorButton extends React.Component {
       super();
     }
     _handleClick(type) {
-      console.log(type.target.textContent);
+      let selectedType = type.target.textContent;
+      console.log("holi" + selectedType);
+
     }
     render() {
       return (

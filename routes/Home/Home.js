@@ -10,6 +10,8 @@
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
+import ShapesSet from '../../components/Canvas';
+
 import s from './Home.css';
 
 const title = 'React App Starter Kit';
@@ -28,9 +30,7 @@ class HomePage extends React.Component {
     return (
       <Layout className={s.content}>
         <div className="jumbotron">
-        <h1>Bootstrap Tutorial</h1>
-        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive,
-        mobile-first projects on the web.</p>
+            <ShapesSet></ShapesSet>
         </div>
         <div className="container">
         <p>This is some text.</p>
