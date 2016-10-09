@@ -7,6 +7,13 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+ .selectorButton{
+    padding: 10px 15px;
+    background: #d2b93e;
+    color: #000;
+    cursor: pointer;
+ }
+
 @media screen and (max-width: 1024px) {
 
   .content {

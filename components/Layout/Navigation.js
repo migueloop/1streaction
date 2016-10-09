@@ -10,7 +10,6 @@
 import React from 'react';
 import history from '../../core/history';
 import Link from '../Link';
-import ShapeSelector from '../Shapes';
 
 import s from './Navigation.css';
 
@@ -26,9 +25,7 @@ function Navigation() {
       </div>
 
       <div className={s.navSubtitle}>
-
       </div>
-      <ShapeSelector></ShapeSelector>
     </nav>
   );
 }

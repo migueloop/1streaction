@@ -17,46 +17,17 @@ class ShapeSelector extends React.Component {
       //this.handleClick = this.handleClick.bind(this);
     }
 
-    _getSelectors () {
-      const selectorsList = [
-        { id:1 , title: 'Diamond'},
-        { id:2, title: 'Square'}
-      ];
-
-      return selectorsList.map((selector) => {
-          return(
-            <SelectorButton buttonType={selector.title} key={selector.id}> </SelectorButton>
-          );
-        });
-    }
-
 
     render() {
-      var selectors = this._getSelectors();
+      var selectors = this.state.selectorsList.map(function(childData,childIndex) {
+        return <a className={s.button} onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</a>;
+      }.bind(this));
+
       return (
         <div>
           {selectors}
        </div>
       );
-    }
-
-}
-
-
-class SelectorButton extends React.Component {
-
-    constructor() {
-      super();
-    }
-    _handleClick(type) {
-      let selectedType = type.target.textContent;
-      console.log("holi" + selectedType);
-
-    }
-    render() {
-      return (
-          <a className={s.button} onClick={this._handleClick.bind(this.props.buttonType)}>{this.props.buttonType}</a>
-        );
     }
 
 }
