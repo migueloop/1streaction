@@ -11,7 +11,6 @@ import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import ShapesSet from '../../components/Canvas';
-import ShapeSelector from '../../components/Shapes';
 
 import s from './Home.css';
 

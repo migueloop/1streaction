@@ -8,7 +8,7 @@
  */
 /* jshint esversion: 6 */
 import React, { PropTypes } from 'react';
-import s from './Shape.css';
+import t from './Shape.css';
 
 class ShapesSet extends React.Component {
   constructor(){
@@ -69,18 +69,16 @@ class ShapesSet extends React.Component {
 
   render() {
     let s = this.initSets(25, this.props.shapeType);
-        var sets1 = s.map((canvas) => {
+        var sets = s.map((canvas) => {
         return(
             <Shape key={canvas.key} size={canvas.size} cx={canvas.cx} cy={canvas.cy} shapeType={this.props.shapeType}> </Shape>
         );
       });
 
       return(
-        <div className={s.shape}>
-          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" >
-             {sets1}
+          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={t.shape}>
+             {sets}
           </svg>
-        </div>
       )
   }
 
