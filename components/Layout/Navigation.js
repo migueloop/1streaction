@@ -21,7 +21,7 @@ function Navigation() {
   return (
     <nav className={s.nav}>
       <div className={s.navTitle}>
-        Geometric shapes
+        <h1>  Geometric shapes </h1>
       </div>
 
       <div className={s.navSubtitle}>

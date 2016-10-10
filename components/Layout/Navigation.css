@@ -8,10 +8,9 @@
  */
 
 .navTitle{
-  background-color: #770000;
-  height: 2em;
-  font-size: 1.2em;
+  background-color: #c31313;
   text-align: center;
+  padding: 1em;
 }
 
 .navSubtitle{

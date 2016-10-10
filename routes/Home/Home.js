@@ -11,6 +11,7 @@ import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import ShapesSet from '../../components/Canvas';
+import { Button , ButtonToolbar , Grid, Row, Col } from 'react-bootstrap';
 
 import s from './Home.css';
 
@@ -50,17 +51,31 @@ class HomePage extends React.Component {
   render() {
 
     var selectors = this.state.selectorsList.map(function(childData,childIndex) {
-      return <a className={s.selectorButton} onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</a>;
+      return <Button bsStyle="primary" className={s.selectorButton} onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</Button>;
     }.bind(this));
 
     return (
-      <Layout className={s.content}>
-        <div className="jumbotron">
-            {selectors}
-        </div>
-        <div className="container">
-        <ShapesSet shapeType={this.state.selectedShape}></ShapesSet>
-        </div>
+      <Layout className="container">
+        <Grid>
+          <Row className="show-grid">
+                <Col xs={4} md={4} />
+                <Col xs={4} md={4} >
+                  <ButtonToolbar>
+                    {selectors}
+                  </ButtonToolbar>
+                </Col>
+                <Col xs={4} md={4} />
+          </Row>
+        </Grid>
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={4} md={4} />
+            <Col xs={4} md={4}>
+              <ShapesSet className={s.shapeSet} shapeType={this.state.selectedShape}></ShapesSet>
+            </Col>
+            <Col xs={4} md={4} />
+          </Row>
+        </Grid>
       </Layout>
     );
   }

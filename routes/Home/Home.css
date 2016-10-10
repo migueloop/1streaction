@@ -8,16 +8,23 @@
  */
 
  .selectorButton{
-    padding: 10px 15px;
     background: #d2b93e;
     color: #000;
     cursor: pointer;
  }
 
+.centered {
+  margin: auto; max-width: 300px;
+}
+ .shapesDisplay{
+   margin: 3em;
+   composes: centered;
+ }
+
 @media screen and (max-width: 1024px) {
 
   .content {
-    padding: 0 16px;
+    padding: 0.5em;
   }
 
 }
