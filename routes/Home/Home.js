@@ -58,11 +58,9 @@ class HomePage extends React.Component {
       <Layout className={s.content}>
         <div className="jumbotron">
             {selectors}
-            <ShapesSet shapeType={this.state.selectedShape}></ShapesSet>
         </div>
         <div className="container">
-        <p>This is some text.</p>
-        <p>This is another text.</p>
+        <ShapesSet shapeType={this.state.selectedShape}></ShapesSet>
         </div>
       </Layout>
     );
