@@ -9,6 +9,9 @@
 /* jshint esversion: 6 */
 import React, { PropTypes } from 'react';
 import t from './Shape.css';
+import classNames from 'classnames/bind';
+
+let cx = classNames.bind(t);
 
 class ShapesSet extends React.Component {
   constructor(){
@@ -75,8 +78,14 @@ class ShapesSet extends React.Component {
         );
       });
 
+      // var classNames = cx(
+      //
+      //   'diamond': this.state.selectedShape ? 'diamond' || 'square'
+      //
+      // );
+      console.log("aa" +  className);
       return(
-          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={t.shape}>
+          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={this.props.shapeType}>
              {sets}
           </svg>
       )

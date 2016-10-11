@@ -11,9 +11,9 @@ import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link';
 import ShapesSet from '../../components/Canvas';
-import { Button , ButtonToolbar , Grid, Row, Col } from 'react-bootstrap';
-
+import { Button , ButtonGroup , Grid, Row, Col } from 'react-bootstrap';
 import s from './Home.css';
+
 
 const title = 'Shapes Drawer';
 
@@ -40,8 +40,8 @@ class HomePage extends React.Component {
       this.setState(
         {selectedShape : childData.title}
       );
-      console.log("The Child button data is: " + childData.title + " - " + childData.id);
-      console.log("The Child HTML is: " + event.target.outerHTML);
+      //console.log("The Child button data is: " + childData.title + " - " + childData.id);
+      //console.log("The Child HTML is: " + event.target.outerHTML);
   }
 
   componentDidMount() {
@@ -51,32 +51,31 @@ class HomePage extends React.Component {
   render() {
 
     var selectors = this.state.selectorsList.map(function(childData,childIndex) {
-      return <Button bsStyle="primary" className={s.selectorButton} onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</Button>;
+      return <Button bsStyle="primary" onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</Button>;
     }.bind(this));
 
     return (
-      <Layout className="container">
+      <Layout>
         <Grid>
-          <Row className="show-grid">
-                <Col xs={4} md={4} />
-                <Col xs={4} md={4} >
-                  <ButtonToolbar>
-                    {selectors}
-                  </ButtonToolbar>
-                </Col>
-                <Col xs={4} md={4} />
-          </Row>
-        </Grid>
-        <Grid>
-          <Row className="show-grid">
-            <Col xs={4} md={4} />
-            <Col xs={4} md={4}>
-              <ShapesSet className={s.shapeSet} shapeType={this.state.selectedShape}></ShapesSet>
+        <Row bsClass={s.rowCentered}>
+            <Col xs={6} bsClass={s.rowCentered}>
+              <ButtonGroup>
+                {selectors}
+              </ButtonGroup>
             </Col>
-            <Col xs={4} md={4} />
+          </Row>
+          <Row bsClass={s.rowCentered}>
+            <Col xs={6} bsClass={s.rowCentered}>
+                <ShapesSet shapeType={this.state.selectedShape}></ShapesSet>
+            </Col>
           </Row>
         </Grid>
+
       </Layout>
+
+
+
+
     );
   }
 

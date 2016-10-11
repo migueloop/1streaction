@@ -10,15 +10,21 @@
  .selectorButton{
     background: #d2b93e;
     color: #000;
-    cursor: pointer;
+    margin-top: 0.5em;
  }
 
-.centered {
-  margin: auto; max-width: 300px;
-}
+ .rowCentered {
+     text-align:center;
+ }
+ .colCentered {
+     display:inline-block;
+     float:none;
+     /* reset the text-align */
+     text-align:left;
+     /* inline-block space fix */
+     margin-right:-4px;
+ }
  .shapesDisplay{
-   margin: 3em;
-   composes: centered;
  }
 
 @media screen and (max-width: 1024px) {
