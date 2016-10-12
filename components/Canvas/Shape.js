@@ -83,9 +83,9 @@ class ShapesSet extends React.Component {
       //   'diamond': this.state.selectedShape ? 'diamond' || 'square'
       //
       // );
-      console.log("aa" +  className);
+      //console.log("aa" +  className);
       return(
-          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={this.props.shapeType}>
+          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={t.shape}>
              {sets}
           </svg>
       )
