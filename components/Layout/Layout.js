@@ -12,6 +12,7 @@ import Header from './Header';
 import s from './Layout.css';
 
 function Layout(props) {
+  console.log(props);
   return (
     <div className={s.root}>
       <Header />

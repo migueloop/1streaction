@@ -51,7 +51,7 @@ class HomePage extends React.Component {
   render() {
 
     var selectors = this.state.selectorsList.map(function(childData,childIndex) {
-      return <Button bsStyle="primary" onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</Button>;
+      return <Button bsStyle="primary" bsClass={s.selectorButton} onClick={this.handleChildClick.bind(null,childData)} key={childData.id}> {childData.title}</Button>;
     }.bind(this));
 
     return (

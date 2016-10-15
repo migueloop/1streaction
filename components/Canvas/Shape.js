@@ -1,15 +1,16 @@
 /**
- * React App SDK (https://github.com/kriasoft/react-app)
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+* React App SDK (https://github.com/kriasoft/react-app)
+*
+* Copyright © 2015-present Kriasoft, LLC. All rights reserved.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.txt file in the root directory of this source tree.
+*/
 /* jshint esversion: 6 */
 import React, { PropTypes } from 'react';
 import t from './Shape.css';
 import classNames from 'classnames/bind';
+import ReactCSSTransitionGroup from 'react-addons-transition-group';
 
 let cx = classNames.bind(t);
 
@@ -24,14 +25,14 @@ class ShapesSet extends React.Component {
     var result = [];
     switch (shapeType) {
       case 'diamond':
-        result = this._createDiamondSet(limitRow, initialSize, 15);
-        break;
+      result = this._createDiamondSet(limitRow, initialSize, 13);
+      break;
       case 'square':
-        result = this._createSquareSet(limitRow, initialSize, 20);
-        break;
+      result = this._createSquareSet(limitRow, initialSize, 20);
+      break;
       default:
-        result = this._createSquareSet(limitRow, initialSize, 20);
-        break;
+      result = this._createSquareSet(limitRow, initialSize, 20);
+      break;
     }
     return result;
   }
@@ -72,38 +73,39 @@ class ShapesSet extends React.Component {
 
   render() {
     let s = this.initSets(25, this.props.shapeType);
-        var sets = s.map((canvas) => {
-        return(
-            <Shape key={canvas.key} size={canvas.size} cx={canvas.cx} cy={canvas.cy} shapeType={this.props.shapeType}> </Shape>
-        );
-      });
-
-      // var classNames = cx(
-      //
-      //   'diamond': this.state.selectedShape ? 'diamond' || 'square'
-      //
-      // );
-      //console.log("aa" +  className);
+    var sets = s.map((canvas) => {
       return(
-          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={t.shape}>
-             {sets}
-          </svg>
-      )
+        <Shape key={canvas.key} size={canvas.size} cx={canvas.cx} cy={canvas.cy} shapeType={this.props.shapeType}> </Shape>
+      );
+    });
+
+    // var classNames = cx(
+    //
+    //   'diamond': this.state.selectedShape ? 'diamond' || 'square'
+    //
+    // );
+    //console.log("aa" +  className);
+    return(
+      <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" className={t[this.props.shapeType]}>
+      {sets}
+      </svg>
+    )
   }
 
 
   /**
-   Util Functions
+  Util Functions
   */
 
   //rotate cx,cy mathemathically over x,y points with a given angle
   _rotate(cx, cy, x, y, angle) {
     var radians = (Math.PI / 180) * angle,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians),
-        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
-        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
-    return [nx, ny];
+    cos = Math.cos(radians),
+    sin = Math.sin(radians),
+    nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+    ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    //Strech vertically (* 1.2)
+    return [nx, ny * 1.2];
   }
 
   //Search first n^n number.
@@ -113,7 +115,7 @@ class ShapesSet extends React.Component {
       totalElems--;
       resLimit = Math.sqrt(totalElems);
     }
-      return resLimit;
+    return resLimit;
   }
 
   //bidimensional array to represent (x,y) points
@@ -126,7 +128,7 @@ class ShapesSet extends React.Component {
     for(var i = 0; i < limitRow; i++){
       for(var j = 0 ; j < limitRow; j++){
         coords.push({x: posx, y: posy});
-          posx += shapesSeparation;
+        posx += shapesSeparation;
       }
       posx = 0;
       posy += shapesSeparation;
@@ -138,50 +140,50 @@ class ShapesSet extends React.Component {
 
 class Shape extends React.Component {
 
-    constructor() {
-      super();
-      this.state = {
-        shape: 'circle',
-        size: 20,
-        color: 'red'
-      };
+  constructor() {
+    super();
+    this.state = {
+      shape: 'circle',
+      size: 20,
+      color: 'red'
+    };
   }
 
-    changeShape (shapeName){
-      var n = this.state.shape + 1;
-       this.setState({
-           shape: shapeName
-       });
-    }
+  changeShape (shapeName){
+    var n = this.state.shape + 1;
+    this.setState({
+      shape: shapeName
+    });
+  }
 
-    changeSize (s){
-      var n = this.state.size + 1;
-      this.setState({
-          size: s
-      });
-    }
+  changeSize (s){
+    var n = this.state.size + 1;
+    this.setState({
+      size: s
+    });
+  }
 
-    changeColor(c){
-       this.setState({
-           color: c
-       });
-    }
+  changeColor(c){
+    this.setState({
+      color: c
+    });
+  }
 
-    render() {
-      switch (this.state.shape) {
-            case 'circle':
-                let size = this.props.size || this.state.size;
-                return(
-                    <circle
-                        cx={this.props.cx}
-                        cy={this.props.cy}
-                        r={size}
-                        fill={this.state.color}
-                        />
-                      )
-                //add more shapes here
-        }
+  render() {
+    switch (this.state.shape) {
+      case 'circle':
+      let size = this.props.size || this.state.size;
+      return(
+        <circle
+        cx={this.props.cx}
+        cy={this.props.cy}
+        r={size}
+        fill={this.state.color}
+        />
+      )
+      //add more shapes here
     }
+  }
 
 }
 
