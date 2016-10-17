@@ -1,45 +1,71 @@
-/**
- * React App SDK (https://github.com/kriasoft/react-app)
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+import menubar from 'menubar';
+import electron, { ipcMain } from 'electron';
 
-import 'whatwg-fetch';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
-import store from './core/store';
-import router from './core/router';
-import history from './core/history';
+// Module to control application life.
+const app = electron.app;
+// Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow;
 
-let routes = require('./routes.json'); // Loaded with utils/routes-loader.js
-const container = document.getElementById('root');
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow;
 
-function renderComponent(component) {
-  ReactDOM.render(<Provider store={store}>{component}</Provider>, container);
-}
+  require('electron-debug')({showDevTools: true}); // eslint-disable-line global-require
 
-// Find and render a web page matching the current URL path,
-// if such page is not found then render an error page (see routes.json, core/router.js)
-function render(location) {
-  router.resolve(routes, location)
-    .then(renderComponent)
-    .catch(error => router.resolve(routes, { ...location, error }).then(renderComponent));
-}
+function createWindow () {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({width: 800, height: 600});
 
-// Handle client-side navigation by using HTML5 History API
-// For more information visit https://github.com/ReactJSTraining/history/tree/master/docs#readme
-history.listen(render);
-render(history.getCurrentLocation());
+  // and load the index.html of the app.
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-// Enable Hot Module Replacement (HMR)
-if (module.hot) {
-  module.hot.accept('./routes.json', () => {
-    routes = require('./routes.json'); // eslint-disable-line global-require
-    render(history.getCurrentLocation());
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools();
+
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null;
   });
 }
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// app.on('ready', createWindow);
+
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
+
+// menubar
+const mb = menubar({
+  'width': 500,
+  'height': 700,
+  'preload-window': true,
+  'resizable': false
+});
+mb.on('ready', function ready () {
+  console.log('app is ready')
+  // your app code here
+});
+
+// ipc communication
+ipcMain.on('quit', () => {
+  app.quit();
+});
