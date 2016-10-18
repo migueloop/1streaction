@@ -1,0 +1,25 @@
+.shape {
+  overflow: visible !important;
+  padding-top:3em;
+}
+
+.diamond{
+  overflow: visible !important;
+  padding-top:3em;
+  padding-left: 4em;
+}
+
+.square{
+  overflow: visible !important;
+  padding-top:3em;
+  padding-left: .8em;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
