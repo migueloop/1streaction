@@ -39,10 +39,11 @@ export default class App extends Component {
           <nav className={s.nav}>
           <div className={s.navTitle}>
             <h1>  Geometric shapes </h1>
+              <p> {this.state.selectedShape} </p>
           </div>
 
           <div className={s.navSubtitle}>
-            {this.state.selectedShape}
+
           </div>
         </nav>
         <div>
