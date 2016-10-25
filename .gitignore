@@ -3,3 +3,4 @@ node_modules
 .editorconfig
 .npmignore
 .gitattributes
+bower_components
