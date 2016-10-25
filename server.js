@@ -62,7 +62,7 @@ app.get('/api/createShapes', function(req, res, next) {
 app.get('/api/shapes', function(req, res, next) {
   Shapes
     .find()
-    .limit(3)
+    .limit(9)
     .exec(function(err, shapes) {
       if (err) return next(err);
       res.send(shapes);
