@@ -8,12 +8,17 @@ class ShapesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = ShapesListStore.getState();
+    this.props = props;
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
     ShapesListStore.listen(this.onChange);
-    ShapesListActions.getDefaultShapes();
+    var filterName;
+    if(this.props.params !== undefined) {
+      filterName   = this.props.params.filterName;
+    }
+    ShapesListActions.getFilteredShapes(filterName);
   }
 
   componentWillUnmount() {
@@ -21,6 +26,7 @@ class ShapesList extends React.Component {
   }
 
   onChange(state) {
+    console.log("on change entra");
     this.setState(state);
   }
 
@@ -28,20 +34,20 @@ class ShapesList extends React.Component {
 
   }
 
+  willTransitionTo(transition,component){
+    console.log("really?");
+  }
+
   render() {
     var shapesList = this.state.shapes.map((shape, index) => {
      return (
        <div key={shape._id} className='col-xs-6 col-sm-4 col-md-4'>
          <div className='thumbnail fadeInUp animated'>
-           <img onClick={this.handleClick.bind(this, shape)} src={'./img/shapes/' + shape.url}/>
+           <img onClick={this.handleClick.bind(this, shape)} src={'/img/shapes/' + shape.url}/>
          </div>
        </div>
      );
     });
-
-    console.log("aaaa2");
-    console.log(this.state.shapes);
-
     return (
         <div className='list-group'>
           {shapesList}

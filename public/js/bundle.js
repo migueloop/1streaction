@@ -143,16 +143,24 @@ var ShapesListActions = function () {
   }
 
   _createClass(ShapesListActions, [{
-    key: 'getDefaultShapes',
-    value: function getDefaultShapes() {
+    key: 'getFilteredShapes',
+    value: function getFilteredShapes(filterName) {
       var _this = this;
 
-      console.log("joeeee");
-      $.ajax({ url: '/api/shapes' }).done(function (data) {
-        _this.actions.getShapesSuccess(data);
-      }).fail(function (jqXhr) {
-        _this.actions.getShapesFail(jqXhr.responseJSON.message);
-      });
+      if (filterName != undefined) {
+        $.ajax({ url: '/api/shapes/filter/' + filterName }).done(function (data) {
+          console.log(data);
+          _this.actions.getShapesSuccess(data);
+        }).fail(function (jqXhr) {
+          _this.actions.getShapesFail(jqXhr.responseJSON.message);
+        });
+      } else {
+        $.ajax({ url: '/api/shapes/' }).done(function (data) {
+          _this.actions.getShapesSuccess(data);
+        }).fail(function (jqXhr) {
+          _this.actions.getShapesFail(jqXhr.responseJSON.message);
+        });
+      }
     }
   }]);
 
@@ -427,6 +435,10 @@ var _NavbarActions = require('../actions/NavbarActions');
 
 var _NavbarActions2 = _interopRequireDefault(_NavbarActions);
 
+var _ShapesListActions = require('../actions/ShapesListActions');
+
+var _ShapesListActions2 = _interopRequireDefault(_ShapesListActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -522,7 +534,7 @@ var Navbar = function (_React$Component) {
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/filter/color' },
+                    { to: '/filter/color', onClick: _ShapesListActions2.default.getFilteredShapes.bind(this, 'color') },
                     'Color'
                   )
                 ),
@@ -531,7 +543,7 @@ var Navbar = function (_React$Component) {
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/filter/type' },
+                    { to: '/filter/type', onClick: _ShapesListActions2.default.getFilteredShapes.bind(this, 'type') },
                     'Type'
                   )
                 )
@@ -548,7 +560,7 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../actions/NavbarActions":3,"../stores/NavbarStore":15,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"../actions/NavbarActions":3,"../actions/ShapesListActions":4,"../stores/NavbarStore":15,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -588,6 +600,7 @@ var ShapesList = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ShapesList.__proto__ || Object.getPrototypeOf(ShapesList)).call(this, props));
 
     _this.state = _ShapesListStore2.default.getState();
+    _this.props = props;
     _this.onChange = _this.onChange.bind(_this);
     return _this;
   }
@@ -596,7 +609,11 @@ var ShapesList = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _ShapesListStore2.default.listen(this.onChange);
-      _ShapesListActions2.default.getDefaultShapes();
+      var filterName;
+      if (this.props.params !== undefined) {
+        filterName = this.props.params.filterName;
+      }
+      _ShapesListActions2.default.getFilteredShapes(filterName);
     }
   }, {
     key: 'componentWillUnmount',
@@ -606,11 +623,17 @@ var ShapesList = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange(state) {
+      console.log("on change entra");
       this.setState(state);
     }
   }, {
     key: 'handleClick',
     value: function handleClick() {}
+  }, {
+    key: 'willTransitionTo',
+    value: function willTransitionTo(transition, component) {
+      console.log("really?");
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -623,14 +646,10 @@ var ShapesList = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'thumbnail fadeInUp animated' },
-            _react2.default.createElement('img', { onClick: _this2.handleClick.bind(_this2, shape), src: './img/shapes/' + shape.url })
+            _react2.default.createElement('img', { onClick: _this2.handleClick.bind(_this2, shape), src: '/img/shapes/' + shape.url })
           )
         );
       });
-
-      console.log("aaaa2");
-      console.log(this.state.shapes);
-
       return _react2.default.createElement(
         'div',
         { className: 'list-group' },
@@ -702,15 +721,20 @@ var _Home = require('./components/Home');
 
 var _Home2 = _interopRequireDefault(_Home);
 
+var _ShapesList = require('./components/ShapesList');
+
+var _ShapesList2 = _interopRequireDefault(_ShapesList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createElement(
   _reactRouter.Route,
   { component: _App2.default },
-  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/filter/:filterName', component: _ShapesList2.default })
 );
 
-},{"./components/App":6,"./components/Home":8,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"./components/App":6,"./components/Home":8,"./components/ShapesList":10,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

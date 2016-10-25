@@ -55,20 +55,39 @@ app.get('/api/createShapes', function(req, res, next) {
     }
   });
 });
+
 /**
- * GET /api/shapes
- * Returns shapes by default.
+ * GET /api/shapes/filter/:filterName
+ * Returns shapes sorting by specified fields.
  */
-app.get('/api/shapes', function(req, res, next) {
-  Shapes
-    .find()
-    .limit(9)
-    .exec(function(err, shapes) {
-      if (err) return next(err);
-      res.send(shapes);
+app.get('/api/shapes/filter/:filter', function(req, res, next) {
+    var filterName = req.params.filter || '';
+    console.log("aaa" + filterName);
+    Shapes
+      .find()
+      .sort(filterName).exec(function (err, shapes) {
+        if (err) {
+            next(err);
+        } else {
+          console.log(shapes);
+            res.send(shapes);
+        }
     });
 });
 
+/**
+ * GET /api/shapes
+ * Returns shapes by with filters.
+ */
+app.get('/api/shapes/', function(req, res, next) {
+    Shapes
+      .find()
+      .limit(9)
+      .exec(function(err, shapes) {
+        if (err) return next(err);
+        res.send(shapes);
+      });
+});
 /**
  * PUT /api/characters
  * Update winning and losing count for both characters.

@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import NavbarStore from '../stores/NavbarStore';
 import NavbarActions from '../actions/NavbarActions';
+import ShapesListActions from '../actions/ShapesListActions';
+
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -38,8 +40,8 @@ class Navbar extends React.Component {
             <li className='dropdown'>
               <a href='#' className='dropdown-toggle' data-toggle='dropdown'>Filter by <span className='caret'></span></a>
               <ul className='dropdown-menu'>
-                <li><Link to='/filter/color'>Color</Link></li>
-                <li><Link to='/filter/type'>Type</Link></li>
+                <li><Link to='/filter/color' onClick={ShapesListActions.getFilteredShapes.bind(this, 'color')}>Color</Link></li>
+                <li><Link to='/filter/type' onClick={ShapesListActions.getFilteredShapes.bind(this, 'type')}>Type</Link></li>
               </ul>
             </li>
           </ul>
