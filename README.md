@@ -18,7 +18,7 @@ For this project, you must create a simple page with react. The page must includ
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img11.png?raw=true" width="200" height="200"/>
-</p> 
+</p>
 
 If you press on the button ‘square’, a square must be progressively drawn (The animation to draw the square is left to your discretion). The shape must be draw with the duplication of this circle image (or any other shape of your choice). Finally, the name of the shape appears on the header.
 Same thing is asked for the diamond shape.
@@ -100,3 +100,20 @@ The last part, same thing I preferred to start a new project but now using Alt i
 <p align="center">
   <img src="https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img9.png?raw=true"/>
 </p>
+
+### How to Run
+Development in 3 different terminals
+
+```sh
+$ npm run watch
+$ gulp
+$ mongob
+```
+
+Just run
+```sh
+$ npm start
+$ mongob
+```
+
+To import default collection just call http://localhost:3000/api/createShapes via GET
