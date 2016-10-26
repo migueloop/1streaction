@@ -139,7 +139,7 @@ var ShapesListActions = function () {
   function ShapesListActions() {
     _classCallCheck(this, ShapesListActions);
 
-    this.generateActions('getShapesSuccess', 'getShapesFail');
+    this.generateActions('updateShapeSeenTimesSuccess', 'updateShapeSeenTimesFail', 'getShapesSuccess', 'getShapesFail');
   }
 
   _createClass(ShapesListActions, [{
@@ -169,9 +169,9 @@ var ShapesListActions = function () {
       $.ajax({ url: '/api/shape/see/' + shapeId,
         type: 'PUT'
       }).done(function (data) {
-        _this2.actions.updateShapeSeenSuccess(data);
+        _this2.actions.updateShapeSeenTimesSuccess(data);
       }).fail(function (jqXhr) {
-        _this2.actions.updateShapeSeenFail(jqXhr.responseJSON.message);
+        _this2.actions.updateShapeSeenTimesFail(jqXhr.responseJSON.message);
       });
     }
   }]);
@@ -641,6 +641,11 @@ var ShapesList = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick() {}
   }, {
+    key: 'onMouseLeaveHandler',
+    value: function onMouseLeaveHandler(shape) {
+      _ShapesListActions2.default.updateShapeSeenTimes(shape._id);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -652,7 +657,7 @@ var ShapesList = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'thumbnail fadeInUp animated' },
-            _react2.default.createElement('img', { onClick: _this2.handleClick.bind(_this2, shape), onMouseOver: _ShapesListActions2.default.updateShapeSeenTimes(shape._id), src: '/img/shapes/' + shape.url })
+            _react2.default.createElement('img', { key: shape._id, onClick: _this2.handleClick.bind(_this2, shape), onMouseLeave: _this2.onMouseLeaveHandler.bind(_this2, shape), src: '/img/shapes/' + shape.url })
           )
         );
       });
@@ -920,6 +925,16 @@ var ShapesListStore = function () {
   }
 
   _createClass(ShapesListStore, [{
+    key: 'onUpdateShapeSeenTimesSuccess',
+    value: function onUpdateShapeSeenTimesSuccess(shape) {
+      //Todo fire action to update any king of counter in navbar
+    }
+  }, {
+    key: 'onUpdateShapeSeenTimesFail',
+    value: function onUpdateShapeSeenTimesFail(errorMessage) {
+      toastr.error(errorMessage);
+    }
+  }, {
     key: 'onGetShapesSuccess',
     value: function onGetShapesSuccess(data) {
       this.shapes = data;

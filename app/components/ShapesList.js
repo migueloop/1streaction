@@ -33,12 +33,16 @@ class ShapesList extends React.Component {
 
   }
 
+  onMouseLeaveHandler(shape){
+    ShapesListActions.updateShapeSeenTimes(shape._id);
+  }
+
   render() {
     var shapesList = this.state.shapes.map((shape, index) => {
      return (
        <div key={shape._id} className='col-xs-6 col-sm-4 col-md-4'>
          <div className='thumbnail fadeInUp animated'>
-           <img onClick={this.handleClick.bind(this, shape)} onMouseOver={ShapesListActions.updateShapeSeenTimes(shape._id)} src={'/img/shapes/' + shape.url}/>
+           <img key={shape._id} onClick={this.handleClick.bind(this, shape)} onMouseLeave={this.onMouseLeaveHandler.bind(this,shape)} src={'/img/shapes/' + shape.url}/>
          </div>
        </div>
      );

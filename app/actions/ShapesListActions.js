@@ -3,10 +3,10 @@ import alt from '../alt';
 class ShapesListActions {
   constructor() {
     this.generateActions(
-      'getShapesSuccess',
-      'getShapesFail',
       'updateShapeSeenTimesSuccess',
-      'updateShapeSeenTimesFail'
+      'updateShapeSeenTimesFail',
+      'getShapesSuccess',
+      'getShapesFail'
     );
   }
 
@@ -39,7 +39,7 @@ class ShapesListActions {
           this.actions.updateShapeSeenTimesSuccess(data);
         })
         .fail(jqXhr => {
-          this.actions.updateShapeSeenTimesFail(jqXhr.responseJSON.message);
+         this.actions.updateShapeSeenTimesFail(jqXhr.responseJSON.message);
         });
       }
 

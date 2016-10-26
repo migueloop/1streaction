@@ -7,6 +7,14 @@ class ShapesListStore {
     this.shapes = [];
   }
 
+  onUpdateShapeSeenTimesSuccess(shape) {
+    //Todo fire action to update any king of counter in navbar
+  }
+
+  onUpdateShapeSeenTimesFail(errorMessage) {
+    toastr.error(errorMessage);
+  }
+
   onGetShapesSuccess(data) {
     this.shapes = data;
   }

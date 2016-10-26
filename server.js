@@ -68,7 +68,6 @@ app.get('/api/shapes/filter/:filter', function(req, res, next) {
         if (err) {
             next(err);
         } else {
-          console.log(shapes);
             res.send(shapes);
         }
     });
@@ -89,16 +88,19 @@ app.get('/api/shapes/', function(req, res, next) {
 });
 
 /**
- * GET /api/shapes
- * Returns shapes by with filters.
+ * GET /api/shapes/see/:shapeId
+ * Update a shape when it has been seen (mouse over in this case).
  */
 app.put('/api/shape/see/:shapeId', function(req, res, next) {
     var shapeId = req.params.shapeId;
-    Shapes.findByIdAndUpdate({ _id: shapeId }, {$inc: {seenTimes:1}},
-    function(err, shapes) {
-      if (err) return next(err);
-      res.send(shapes);
-    });
+    Shapes
+    .findByIdAndUpdate({ _id: shapeId }, {$inc: {seenTimes:1}})
+    .exec(
+      function(err, s) {
+        if (err) return next(err);
+        console.log('hexo bro!' + s);
+        res.send(s);
+      });
 });
 
 
