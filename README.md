@@ -56,7 +56,7 @@ The second client is a webpage that shows the content of the database (geometric
 And sorting by color should give a result similar to this:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img5.png?raw=true"/>
+  <img src="https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img5.png?raw=true" width="200"/>
 </p>
 
 A dynamic, animated resorting is a plus.
