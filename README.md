@@ -1,10 +1,7 @@
 Table of Contents
 =================
+
    * [Challenge process](#challenge-process)
-         * [React](#react)
-         * [Bootstrap](#bootstrap)
-         * [Electron](#electron)
-         * [NodeJs](#nodejs)
    * [Results](#results)
       * [React branch](#react-branch)
       * [Bootstrap branch](#bootstrap-branch)
