@@ -149,7 +149,6 @@ var ShapesListActions = function () {
 
       if (filterName != undefined) {
         $.ajax({ url: '/api/shapes/filter/' + filterName }).done(function (data) {
-          console.log(data);
           _this.actions.getShapesSuccess(data);
         }).fail(function (jqXhr) {
           _this.actions.getShapesFail(jqXhr.responseJSON.message);
@@ -161,6 +160,19 @@ var ShapesListActions = function () {
           _this.actions.getShapesFail(jqXhr.responseJSON.message);
         });
       }
+    }
+  }, {
+    key: 'updateShapeSeenTimes',
+    value: function updateShapeSeenTimes(shapeId) {
+      var _this2 = this;
+
+      $.ajax({ url: '/api/shape/see/' + shapeId,
+        type: 'PUT'
+      }).done(function (data) {
+        _this2.actions.updateShapeSeenSuccess(data);
+      }).fail(function (jqXhr) {
+        _this2.actions.updateShapeSeenFail(jqXhr.responseJSON.message);
+      });
     }
   }]);
 
@@ -623,17 +635,11 @@ var ShapesList = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange(state) {
-      console.log("on change entra");
       this.setState(state);
     }
   }, {
     key: 'handleClick',
     value: function handleClick() {}
-  }, {
-    key: 'willTransitionTo',
-    value: function willTransitionTo(transition, component) {
-      console.log("really?");
-    }
   }, {
     key: 'render',
     value: function render() {
@@ -646,7 +652,7 @@ var ShapesList = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'thumbnail fadeInUp animated' },
-            _react2.default.createElement('img', { onClick: _this2.handleClick.bind(_this2, shape), src: '/img/shapes/' + shape.url })
+            _react2.default.createElement('img', { onClick: _this2.handleClick.bind(_this2, shape), onMouseOver: _ShapesListActions2.default.updateShapeSeenTimes(shape._id), src: '/img/shapes/' + shape.url })
           )
         );
       });

@@ -4,7 +4,9 @@ class ShapesListActions {
   constructor() {
     this.generateActions(
       'getShapesSuccess',
-      'getShapesFail'
+      'getShapesFail',
+      'updateShapeSeenTimesSuccess',
+      'updateShapeSeenTimesFail'
     );
   }
 
@@ -12,7 +14,6 @@ class ShapesListActions {
     if(filterName != undefined){
     $.ajax({ url: '/api/shapes/filter/'+ filterName})
       .done(data => {
-        console.log(data);
         this.actions.getShapesSuccess(data);
       })
       .fail(jqXhr => {
@@ -29,6 +30,18 @@ class ShapesListActions {
         });
       }
     }
+
+    updateShapeSeenTimes(shapeId){
+      $.ajax({ url: '/api/shape/see/' + shapeId,
+               type: 'PUT'
+             })
+        .done(data => {
+          this.actions.updateShapeSeenTimesSuccess(data);
+        })
+        .fail(jqXhr => {
+          this.actions.updateShapeSeenTimesFail(jqXhr.responseJSON.message);
+        });
+      }
 
   }
 

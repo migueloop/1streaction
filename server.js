@@ -62,7 +62,6 @@ app.get('/api/createShapes', function(req, res, next) {
  */
 app.get('/api/shapes/filter/:filter', function(req, res, next) {
     var filterName = req.params.filter || '';
-    console.log("aaa" + filterName);
     Shapes
       .find()
       .sort(filterName).exec(function (err, shapes) {
@@ -88,6 +87,21 @@ app.get('/api/shapes/', function(req, res, next) {
         res.send(shapes);
       });
 });
+
+/**
+ * GET /api/shapes
+ * Returns shapes by with filters.
+ */
+app.put('/api/shape/see/:shapeId', function(req, res, next) {
+    var shapeId = req.params.shapeId;
+    Shapes.findByIdAndUpdate({ _id: shapeId }, {$inc: {seenTimes:1}},
+    function(err, shapes) {
+      if (err) return next(err);
+      res.send(shapes);
+    });
+});
+
+
 /**
  * PUT /api/characters
  * Update winning and losing count for both characters.
