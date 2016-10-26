@@ -7,7 +7,7 @@ This project is the result of a challenge process with React + Electron + NodeJS
 For this project, you must create a simple page with react. The page must include a header and 2
 buttons as like this:
 
-![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img1.png)
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img11.png)
 
 If you press on the button ‘square’, a square must be progressively drawn (The animation to draw
 the square is left to your discretion). The shape must be draw with the duplication of this circle
@@ -17,7 +17,7 @@ Same thing is asked for the diamond shape.
 At the end, the shapes should looks like this:
 
 
-![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img2.png)
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img22.png)
 
 Animations for the buttons are also required. For instance, the button could change color or size if
 the mouse is over it. Once done, push your project on your personal github account. Name your
@@ -31,7 +31,7 @@ modify your project to be responsive with Bootstrap. Hence, if you change the wi
 button and shape should resize, looking like this:
 
 
-![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img3.png)
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img33.png)
 
 
 ### Electron
