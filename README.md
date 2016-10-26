@@ -55,3 +55,32 @@ A dynamic, animated resorting is a plus.
 
 Finally, if you pass the mouse over each shape, a description retrieved from the database should appear and give the type of shape, color of it and the number of time seen. The number of time seen is calculated by the number of time you pass the mouse over a shape. Each time you pass the mouse over the shape, you must increment the number of view for the shape and save this
 number in the database.
+
+# Results
+
+## React branch
+I used a boilerplate by kriasoft that makes use of  **[React App SDK](https://github.com/kriasoft/react-app)**. Just to start from scratch.
+
+### How to Run
+In order to compile the app and launch a development web server with "live reload" run:
+
+```sh
+$ npm start
+```
+
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img6.png)
+
+## Bootstrap branch
+Here I added **[react-bootstrap](https://react-bootstrap.github.io/)** extension (following **[Fon](https://github.com/alfonsoperez)**´s advice)
+
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img7.png)
+
+## Electron branch
+And now what? Impossible for me to integrate Electron with the source code I had until now, because react was included as a SDK. So I had to start a new project structure (experience++)
+
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img8.png)
+
+## master branch
+The last part, same thing I preferred to start a new project but now using Alt instead of react-flux (just for learning proposals) and gulp instead of WebPack. There is no CSSComponent this time.
+
+![alt tag](https://raw.githubusercontent.com/migueloop/1streaction/master/chall_imgs/img9.png)
