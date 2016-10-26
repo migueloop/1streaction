@@ -41,8 +41,8 @@ class ShapesList extends React.Component {
     var shapesList = this.state.shapes.map((shape, index) => {
      return (
        <div key={shape._id} className='col-xs-6 col-sm-4 col-md-4'>
-         <div className='thumbnail fadeInUp animated'>
-           <img key={shape._id} onClick={this.handleClick.bind(this, shape)} onMouseLeave={this.onMouseLeaveHandler.bind(this,shape)} src={'/img/shapes/' + shape.url}/>
+         <div className='pointer fadeInUp animated'>
+           <img className='list-group-item' key={shape._id} onClick={this.handleClick.bind(this, shape)} onMouseLeave={this.onMouseLeaveHandler.bind(this,shape)} src={'/img/shapes/' + shape.url}/>
          </div>
        </div>
      );

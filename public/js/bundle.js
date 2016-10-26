@@ -656,8 +656,8 @@ var ShapesList = function (_React$Component) {
           { key: shape._id, className: 'col-xs-6 col-sm-4 col-md-4' },
           _react2.default.createElement(
             'div',
-            { className: 'thumbnail fadeInUp animated' },
-            _react2.default.createElement('img', { key: shape._id, onClick: _this2.handleClick.bind(_this2, shape), onMouseLeave: _this2.onMouseLeaveHandler.bind(_this2, shape), src: '/img/shapes/' + shape.url })
+            { className: 'pointer fadeInUp animated' },
+            _react2.default.createElement('img', { className: 'list-group-item', key: shape._id, onClick: _this2.handleClick.bind(_this2, shape), onMouseLeave: _this2.onMouseLeaveHandler.bind(_this2, shape), src: '/img/shapes/' + shape.url })
           )
         );
       });

@@ -98,7 +98,6 @@ app.put('/api/shape/see/:shapeId', function(req, res, next) {
     .exec(
       function(err, s) {
         if (err) return next(err);
-        console.log('hexo bro!' + s);
         res.send(s);
       });
 });
